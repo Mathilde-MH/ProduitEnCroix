@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Calculateur de pourcentage</title>
+<style>
+   body {
+     background-color: navy; /* bleu marine */
+     color: white; /* texte en blanc pour bien contraster */
+     text-align: center; /* centre le texte */
+     font-family: Arial, sans-serif; /* police plus lisible */
+     margin: 0;
+     padding: 0;
+   }
+   .contenu {
+     padding: 50px;
+   }
+    .logo {
+     width: 150px; /* tu ajustes la taille du logo */
+     margin-top: 20px;
+   }
+
+</style>
+</head>
+<body>
+<img src="logo.png" class="logo">
+<h2>Calcul de pourcentage</h2>
+<label for="part">Montant facturé au locataire :</label>
+<input type="number" id="part" step="any"> <br><br>
+<label for="total">Montant de la prestation :</label>
+<input type="number" id="total" step="any"> <br><br>
+<button onclick="calculerPourcentage()">Calculer</button>
+<p id="resultat"></p>
+<script>
+   function calculerPourcentage() {
+     let part = parseFloat(document.getElementById("part").value);
+     let total = parseFloat(document.getElementById("total").value);
+     let resultat = document.getElementById("resultat");
+     if (!isNaN(part) && !isNaN(total) && total !== 0) {
+       let pourcentage = (part / total) * 100;
+       resultat.textContent = part + " représente " + pourcentage.toFixed(2) + "% de " + total;
+     } else {
+       resultat.textContent = "Merci d'entrer deux nombres valides (et un total non nul).";
+     }
+   }
+</script>
+</body>
+</html>
