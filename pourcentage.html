@@ -1,73 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Calculateur de pourcentage</title>
-  <style>
-    body {
-      background-color: navy;
-      color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .contenu {
-      padding: 30px;
-    }
-    .logo {
-      width: 120px;
-      margin-top: 20px;
-    }
-    input {
-      width: 80%;
-      padding: 8px;
-      font-size: 1em;
-      margin: 8px 0;
-    }
-  </style>
-  <script>
-    // Vérifie si on est dans une popup (pas un onglet normal)
-    if (window.opener == null) {
-      // Si ce n’est pas une popup, on se rouvre dans une popup au bon format
-      window.open(
-        window.location.href, // rouvre la même page
-        'Calculatrice',
-        'width=400,height=500,toolbar=no,menubar=no,scrollbars=no,resizable=no'
-      );
-      window.close(); // ferme la version actuelle
-    }
-  </script>
+<meta charset="UTF-8">
+<title>Calculateur de pourcentage</title>
+<style>
+   body {
+     background-color: navy;
+     color: white;
+     text-align: center;
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+   }
+   .contenu {
+     padding: 50px;
+   }
+   .logo {
+     width: 150px;
+     margin-top: 20px;
+   }
+</style>
 </head>
 <body>
-  <div class="contenu">
-    <img src="https://habitat56.sharepoint.com/:i:/r/sites/Communication/ICHARTE%20GRAPHIQUE/MORBIHAN%20HABITAT/LOGO/Logo%20pour%20%C3%A9cran/Logo%20MH%20BLANC/Morbihan%20Habitat%20-%20Logo%20-%20Blanc%20-%20RVB.png?csf=1&web=1&e=4kRP2p" class="logo">
-    <h2>Calcul de pourcentage</h2>
+<img src="https://habitat56.sharepoint.com/:i:/r/sites/Communication/ICHARTE%20GRAPHIQUE/MORBIHAN%20HABITAT/LOGO/Logo%20pour%20%C3%A9cran/Logo%20MH%20BLANC/Morbihan%20Habitat%20-%20Logo%20-%20Blanc%20-%20RVB.png?csf=1&web=1&e=4kRP2p" class="logo">
+<h2>Calcul de pourcentage</h2>
 
-    <label for="part">Montant facturé au locataire :</label><br>
-    <input type="number" id="part" step="any" oninput="calculerPourcentage()"><br>
+<label for="part">Montant facturé au locataire :</label>
+<input type="number" id="part" step="any"> <br><br>
 
-    <label for="total">Montant de la prestation :</label><br>
-    <input type="number" id="total" step="any" oninput="calculerPourcentage()"><br>
+<label for="total">Montant de la prestation :</label>
+<input type="number" id="total" step="any"> <br><br>
 
-    <p id="resultat"></p>
-  </div>
 
-  <script>
-    function calculerPourcentage() {
-      let part = parseFloat(document.getElementById("part").value);
-      let total = parseFloat(document.getElementById("total").value);
-      let resultat = document.getElementById("resultat");
+<p id="resultat"></p>
 
-      if (!isNaN(part) && !isNaN(total) && total !== 0) {
-        let pourcentage = (part / total) * 100;
-        resultat.textContent = part + " représente " + pourcentage.toFixed(2) + "% de " + total;
-      } else {
-        resultat.textContent = "Merci d'entrer deux nombres valides (et un total non nul).";
-      }
+<script>
+  // Fonction de calcul
+  function calculerPourcentage() {
+    let part = parseFloat(document.getElementById("part").value);
+    let total = parseFloat(document.getElementById("total").value);
+    let resultat = document.getElementById("resultat");
+
+    if (!isNaN(part) && !isNaN(total) && total !== 0) {
+      let pourcentage = (part / total) * 100;
+      resultat.textContent = part + " représente " + pourcentage.toFixed(2) + "% de " + total;
+    } else {
+      resultat.textContent = "";
     }
-  </script>
+  }
+
+  // Déclencher automatiquement le calcul à chaque saisie
+  document.getElementById("part").addEventListener("input", calculerPourcentage);
+  document.getElementById("total").addEventListener("input", calculerPourcentage);
+</script>
 </body>
 </html>
-
 
