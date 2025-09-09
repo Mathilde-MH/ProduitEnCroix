@@ -5,37 +5,40 @@
 <title>Calculateur de pourcentage</title>
 <style>
    body {
-     background-color: navy; /* bleu marine */
-     color: white; /* texte en blanc pour bien contraster */
-     text-align: center; /* centre le texte */
-     font-family: Arial, sans-serif; /* police plus lisible */
+     background-color: navy;
+     color: white;
+     text-align: center;
+     font-family: Arial, sans-serif;
      margin: 0;
      padding: 0;
    }
    .contenu {
      padding: 50px;
    }
-    .logo {
-     width: 150px; /* tu ajustes la taille du logo */
+   .logo {
+     width: 150px;
      margin-top: 20px;
    }
-
 </style>
 </head>
 <body>
 <img src="https://habitat56.sharepoint.com/:i:/r/sites/Communication/ICHARTE%20GRAPHIQUE/MORBIHAN%20HABITAT/LOGO/Logo%20pour%20%C3%A9cran/Logo%20MH%20BLANC/Morbihan%20Habitat%20-%20Logo%20-%20Blanc%20-%20RVB.png?csf=1&web=1&e=4kRP2p" class="logo">
 <h2>Calcul de pourcentage</h2>
+
 <label for="part">Montant facturé au locataire :</label>
-<input type="number" id="part" step="any"> <br><br>
+<input type="number" id="part" step="any" oninput="calculerPourcentage()"> <br><br>
+
 <label for="total">Montant de la prestation :</label>
-<input type="number" id="total" step="any"> <br><br>
-<button onclick="calculerPourcentage()">Calculer</button>
+<input type="number" id="total" step="any" oninput="calculerPourcentage()"> <br><br>
+
 <p id="resultat"></p>
+
 <script>
    function calculerPourcentage() {
      let part = parseFloat(document.getElementById("part").value);
      let total = parseFloat(document.getElementById("total").value);
      let resultat = document.getElementById("resultat");
+
      if (!isNaN(part) && !isNaN(total) && total !== 0) {
        let pourcentage = (part / total) * 100;
        resultat.textContent = part + " représente " + pourcentage.toFixed(2) + "% de " + total;
@@ -45,4 +48,6 @@
    }
 </script>
 </body>
+</html>
+
 </html>
