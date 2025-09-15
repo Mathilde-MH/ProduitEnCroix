@@ -4,38 +4,79 @@
 <meta charset="UTF-8">
 <title>Calculateur de pourcentage</title>
 <style>
-   body {
-     background-color: navy;
-     color: white;
-     text-align: center;
-     font-family: Arial, sans-serif;
-     margin: 0;
-     padding: 0;
-   }
-   .contenu {
-     padding: 50px;
-   }
-   .logo {
-     width: 150px;
-     margin-top: 20px;
-   }
+  body {
+    background-color: navy;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contenu {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .section {
+    flex: 1 1 300px;
+    padding: 20px;
+    max-width: 400px;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  .logo {
+    width: 150px;
+    display: block;
+    margin: 20px auto;
+  }
+
+  input[type="number"] {
+    width: 80%;
+    padding: 8px;
+    margin: 8px 0;
+  }
+
 </style>
 </head>
 <body>
+
 <img src="https://habitat56.sharepoint.com/:i:/r/sites/Communication/ICHARTE%20GRAPHIQUE/MORBIHAN%20HABITAT/LOGO/Logo%20pour%20%C3%A9cran/Logo%20MH%20BLANC/Morbihan%20Habitat%20-%20Logo%20-%20Blanc%20-%20RVB.png?csf=1&web=1&e=4kRP2p" class="logo">
-<h2>Calcul de pourcentage</h2>
 
-<label for="part">Montant facturé au locataire :</label>
-<input type="number" id="part" step="any"> <br><br>
+<div class="contenu">
 
-<label for="total">Montant de la prestation :</label>
-<input type="number" id="total" step="any"> <br><br>
+  <!-- Partie 1 : Calcul du pourcentage -->
+  <div class="section">
+    <h2>Calcul de pourcentage</h2>
+    <label for="part">Montant facturé au locataire :</label><br>
+    <input type="number" id="part" step="any"><br>
 
+    <label for="total">Montant de la prestation :</label><br>
+    <input type="number" id="total" step="any"><br>
 
-<p id="resultat"></p>
+    <p id="resultat"></p>
+  </div>
+
+  <!-- Partie 2 : Calcul à partir d’un pourcentage -->
+  <div class="section">
+    <h2>Calcul à partir d’un pourcentage</h2>
+    <label for="base">Montant de base :</label><br>
+    <input type="number" id="base" step="any"><br>
+
+    <label for="pourcent">Pourcentage :</label><br>
+    <input type="number" id="pourcent" step="any"><br>
+
+    <p id="resultat2"></p>
+  </div>
+
+</div>
 
 <script>
-  // Fonction de calcul
+  // Calcul de pourcentage (part / total)
   function calculerPourcentage() {
     let part = parseFloat(document.getElementById("part").value);
     let total = parseFloat(document.getElementById("total").value);
@@ -49,10 +90,26 @@
     }
   }
 
-  // Déclencher automatiquement le calcul à chaque saisie
+  // Calcul à partir du pourcentage (base * pourcent / 100)
+  function calculerValeurPourcentage() {
+    let base = parseFloat(document.getElementById("base").value);
+    let pourcent = parseFloat(document.getElementById("pourcent").value);
+    let resultat2 = document.getElementById("resultat2");
+
+    if (!isNaN(base) && !isNaN(pourcent)) {
+      let valeur = (base * pourcent) / 100;
+      resultat2.textContent = pourcent + "% de " + base + " = " + valeur.toFixed(2);
+    } else {
+      resultat2.textContent = "";
+    }
+  }
+
+  // Événements pour les deux parties
   document.getElementById("part").addEventListener("input", calculerPourcentage);
   document.getElementById("total").addEventListener("input", calculerPourcentage);
+  document.getElementById("base").addEventListener("input", calculerValeurPourcentage);
+  document.getElementById("pourcent").addEventListener("input", calculerValeurPourcentage);
 </script>
+
 </body>
 </html>
-
